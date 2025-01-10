@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from flask_mail import Mail, Message
 from flask_cors import CORS
@@ -9,12 +10,12 @@ import string
 app = Flask(__name__)
 CORS(app)
 
-app.config['MONGO_URI'] = 'mongodb+srv://goymenmhmd:nZcPoO4NudGLxApx@cluster0.xue2b.mongodb.net/test?'
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'darknessssolohack@gmail.com'
-app.config['MAIL_PASSWORD'] = 'dbkx iwtq mfxd upoa'
+app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 
 mail = Mail(app)
 client = MongoClient(app.config['MONGO_URI'])
