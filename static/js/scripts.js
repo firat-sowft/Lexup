@@ -33,7 +33,7 @@ function sendVerificationCode() {
         }, 3000);
         return;
     }
-    fetch('http://localhost:5000/send_verification_code', {
+    fetch('https://lexup-production.up.railway.app/send_verification_code', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ function sendVerificationCode() {
 
 function sendForgotPasswordCode() {
     const email = document.getElementById('forgot-email').value;
-    fetch('http://localhost:5000/send_forgot_password_code', {
+    fetch('https://lexup-production.up.railway.app/send_forgot_password_code', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -103,7 +103,7 @@ function startTimer(timerId) {
 function login() {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
-    fetch('http://localhost:5000/login', {
+    fetch('https://lexup-production.up.railway.app/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -161,7 +161,7 @@ function register() {
         return;
     }
 
-    fetch('http://localhost:5000/register', {
+    fetch('https://lexup-production.up.railway.app/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -203,7 +203,7 @@ function resetPassword() {
         return;
     }
 
-    fetch('http://localhost:5000/reset_password', {
+    fetch('https://lexup-production.up.railway.app/reset_password', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -241,4 +241,17 @@ function exitGame() {
 
 function showAboutPage() {
     // Implement the about page logic
+}
+
+function saveProgress() {
+    userProgress.push(currentWord);
+    const image = `${currentWord}.jpg`;
+    userImages.push(image);
+    fetch('https://lexup-production.up.railway.app/update_progress', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: userEmail, word: currentWord, image: image })
+    });
 }
