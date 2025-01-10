@@ -1,4 +1,5 @@
 import os
+import dns.resolver  # Add this line to verify dnspython is installed
 from flask import Flask, request, jsonify
 from flask_mail import Mail, Message
 from flask_cors import CORS
@@ -23,6 +24,10 @@ db = client.get_database('test')
 
 def generate_verification_code(length=6):
     return ''.join(random.choices(string.digits, k=length))
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 @app.route('/send_verification_code', methods=['POST'])
 def send_verification_code():
