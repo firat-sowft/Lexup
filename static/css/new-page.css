@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+h1, h2 {
+    margin: 20px 0;
+}
+
+#collection-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@keyframes borderAnimation {
+    0% {
+        border-color: #3498db;
+    }
+    25% {
+        border-color: #9b59b6;
+    }
+    50% {
+        border-color: #e74c3c;
+    }
+    75% {
+        border-color: #f1c40f;
+    }
+    100% {
+        border-color: #3498db;
+    }
+}
+
+#collection-container img {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    cursor: pointer; /* Add pointer cursor */
+    border: 5px solid;
+    animation: borderAnimation 5s infinite; /* Add animation */
+}
+
+#image-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%; /* Update to 90% */
+    max-height: 90%; /* Update to 90% */
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Ensure it is on top */
+}
+
+#image-modal img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: red;
+    cursor: pointer;
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexup</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/new-page.css">
+    <link rel="stylesheet" href="../static/css/game-page.css">
+</head>
+<body>
+    <div id="main-page">
+        <h1>Lexup</h1>
+        <p class="welcome">Hoşgeldiniz !</p>
+        <button onclick="showLoginPage()">Giriş Yap</button>
+        <button onclick="showRegisterPage()">Hesap Oluştur</button>
+        <button onclick="guestLogin()">Misafir Girişi</button>
+        <a href="#" onclick="showAboutPage()">Hakkımızda</a>
+    </div>
+
+    <div id="login-page" class="hidden">
+        <h1>Lexup</h1>
+        <h2>Giriş Yap</h2>
+        <label for="email">E-posta:</label>
+        <input type="email" id="login-email" placeholder="example@gmail.com" required>
+        <label for="password">Şifre:</label>
+        <input type="password" id="login-password" required>
+        <a href="#" onclick="showForgotPasswordPage()">Şifremi Unuttum</a>
+        <button onclick="login()">Onayla</button>
+        <button onclick="showMainPage()">Geri</button>
+        <p id="login-message"></p>
+    </div>
+
+    <div id="register-page" class="hidden">
+        <h1>Lexup</h1>
+        <h2>Hesap Oluştur</h2>
+        <label for="register-email">E-posta:</label>
+        <input type="email" id="register-email" placeholder="example@gmail.com" required>
+        <button onclick="sendVerificationCode()">Doğrulama Kodunu Gönder</button>
+        <div id="verification-section" class="hidden">
+            <label for="verification-code">Doğrulama Kodu:</label>
+            <input type="text" id="verification-code" required>
+            <label for="register-password">Şifre:</label>
+            <input type="password" id="register-password" required>
+            <label for="confirm-password">Şifreyi Onayla:</label>
+            <input type="password" id="confirm-password" required>
+            <button onclick="register()">Onayla</button>
+            <p id="verification-timer"></p>
+        </div>
+        <button onclick="showMainPage()">Geri</button>
+        <p id="register-message"></p>
+    </div>
+
+    <div id="forgot-password-page" class="hidden">
+        <h1>Lexup</h1>
+        <h2>Şifremi Unuttum</h2>
+        <label for="forgot-email">E-posta:</label>
+        <input type="email" id="forgot-email" placeholder="example@gmail.com" required>
+        <button onclick="sendForgotPasswordCode()">Doğrulama Kodunu Gönder</button>
+        <div id="forgot-verification-section" class="hidden">
+            <label for="forgot-verification-code">Doğrulama Kodu:</label>
+            <input type="text" id="forgot-verification-code" required>
+            <label for="new-password">Yeni Şifre:</label>
+            <input type="password" id="new-password" required>
+            <label for="confirm-new-password">Yeni Şifreyi Onayla:</label>
+            <input type="password" id="confirm-new-password" required>
+            <button onclick="resetPassword()">Onayla</button>
+            <p id="forgot-timer"></p>
+        </div>
+        <button onclick="showLoginPage()">Geri</button>
+        <p id="forgot-message"></p>
+    </div>
+
+    <div id="new-page" class="hidden">
+        <h1>Lexup</h1>
+        <h2>Word and Collection</h2>
+        <button onclick="showCategories()">Kategoriler</button>
+        <button onclick="showCollection()">Koleksiyonum</button>
+        <button onclick="showHowToPlay()">Nasıl Oynanır</button>
+        <button onclick="logout()">Hesaptan Çık</button>
+    </div>
+
+    <div id="categories-page" class="hidden">
+        <h1>Lexup</h1>
+        <h2>Words and Collections</h2>
+        <h3>Kategoriler</h3>
+        <button onclick="showLotr()">Yüzüklerin Efendisi</button>
+        <button onclick="showMarvel()">Marvel</button>
+        <button onclick="showLegends()">Efsaneler</button>
+        <button onclick="showNewPage()">Geri</button>
+    </div>
+
+    <div id="game-page" class="hidden">
+        <h1>Lexup</h1>
+        <h2>Words and Collections</h2>
+        <div id="word-container"></div>
+        <p id="hint"></p>
+        <button onclick="useJoker()">Joker Hakkı</button>
+        <p id="joker-count"></p>
+        <p id="message"></p>
+        <button id="next-button" class="hidden" onclick="nextWord()">Sonraki</button>
+        <button id="view-image-button" class="hidden" onclick="viewWonImage()">Kazandığın Resmi Gör</button>
+        <button onclick="showCategories()">Geri</button>
+        <p id="category-complete-message" class="hidden">Kategori tamamlandı!</p>
+    </div>
+
+    <div id="collection-page" class="hidden">
+        <h1>Lexup</h1>
+        <h2>Words and Collections</h2>
+        <div id="collection-container"></div>
+        <button onclick="showNewPage()">Geri</button>
+    </div>
+
+    <div id="image-viewer" class="hidden">
+        <h1>Lexup</h1>
+        <h2>Kazandığın Resim</h2>
+        <img id="won-image" src="" alt="Won Image" style="max-width: 80%; max-height: 80%;">
+        <button onclick="closeImageViewer()">Kapat</button>
+    </div>
+
+    <div id="how-to-play-page" class="hidden">
+        <h1>Lexup</h1>
+        <h2>Nasıl Oynanır</h2>
+        <p>Oyunun amacı, verilen kategorideki kelimeleri doğru tahmin etmektir.</p>
+        <h3>Kurallar:</h3>
+        <ul>
+            <li>Her kelime için 3 tahmin hakkınız vardır.</li>
+            <li>Her tahminde, harflerin doğru olup olmadığını ve doğru konumda olup olmadığını göreceksiniz.</li>
+            <li>Doğru harf ve doğru konum: Yeşil</li>
+            <li>Doğru harf ama yanlış konum: Turuncu</li>
+            <li>Yanlış harf: Kırmızı</li>
+            <li>Joker hakkınızı kullanarak rastgele bir harfi açabilirsiniz. Toplamda 5 joker hakkınız vardır.</li>
+            <li>Kelimeyi doğru tahmin ettiğinizde, kazandığınız resmi görebilirsiniz.</li>
+            <li>Kazandığınız resimler koleksiyonunuza eklenir ve "Koleksiyonum" sayfasında görüntülenebilir.</li>
+        </ul>
+        <button onclick="showNewPage()">Geri</button>
+    </div>
+
+    <div id="image-modal">
+        <span id="close-modal" onclick="closeImageModal()">×</span>
+        <img src="" alt="Enlarged Image">
+    </div>
+
+    <script src="../static/js/scripts.js"></script>
+    <script src="../static/js/new-page.js"></script>
+    <script src="../static/js/game-page.js"></script>
+</body>
+</html>
